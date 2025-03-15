@@ -1,18 +1,15 @@
 package actors
 
 import (
+	"fmt"
 	"log/slog"
 
 	"github.com/Ayikoandrew/atendele/network"
 	"github.com/anthdm/hollywood/actor"
 )
 
-type ConnectPeer struct {
-	Peer network.Transport
-}
-
 type SendMessage struct {
-	From    network.NetAddr
+	To      network.NetAddr
 	Payload []byte
 }
 
@@ -35,15 +32,10 @@ func (a *Actor) Receive(c *actor.Context) {
 	case actor.Started:
 		slog.Info("Transport actor has started")
 		_ = msg
-	case ConnectPeer:
-		for _, tr := range a.Transports {
-			if err := tr.Connect(msg.Peer); err != nil {
-				slog.Error("Failed to connect to peer")
-			}
-		}
 	case SendMessage:
+		fmt.Println("Sending RPC...")
 		for _, tr := range a.Transports {
-			if err := tr.SendMessage(msg.From, msg.Payload); err != nil {
+			if err := tr.SendMessage(msg.To, msg.Payload); err != nil {
 				slog.Error("Failed to send message", "error", err)
 			}
 		}

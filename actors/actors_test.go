@@ -17,7 +17,7 @@ func TestActors_Receive(t *testing.T) {
 	actorPID := actorSystem.Spawn(NewActor(tra), "Actor")
 
 	data := []byte("Hello, World!")
-	actorSystem.Send(actorPID, SendMessage{From: trb.Addr(), Payload: data})
+	actorSystem.Send(actorPID, SendMessage{To: trb.Addr(), Payload: data})
 	assert.Nil(t, tra.Connect(trb))
 
 	rpc := <-trb.Consume()
