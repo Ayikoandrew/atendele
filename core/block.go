@@ -24,15 +24,26 @@ type Block struct {
 	SettlementMetadata uint64
 }
 
-func NewBlock(tx []Transaction) *Block {
+func NewBlock(tx []Transaction, stateDiff *StateDiff, parentHash types.Hash, blockNumber uint64) *Block {
+
+	var sd StateDiff
+	if stateDiff == nil {
+		sd = StateDiff{
+			Balance: make(map[types.Address]map[types.Address]*big.Int),
+			Nonce:   make(map[types.Address]uint64),
+			Storage: make(map[types.Address]map[string][]byte),
+		}
+	} else {
+		sd = *stateDiff
+	}
 	return &Block{
-		BlockNumber:        1,
+		BlockNumber:        blockNumber,
 		Timestamp:          uint64(time.Now().UnixNano()),
 		Transactions:       tx,
-		StateDiff:          StateDiff{},
+		StateDiff:          sd,
 		BlockHash:          types.Hash{},
-		ParentHash:         types.Hash{},
-		SettlementMetadata: 1,
+		ParentHash:         parentHash,
+		SettlementMetadata: 0,
 	}
 }
 
