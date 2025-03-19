@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option go_package = "./types";
+
+message Block {
+    uint64 block_number = 1;
+    uint64 timestamp = 2;
+    repeated Transaction transactions = 3;
+    repeated StateDiff state_diff = 4;
+    uint64 settlement_metadata = 5;
+}
+
+message StateDiff {
+    repeated BalanceUpdate balance_update = 1;
+    repeated NonceUpdate nonce_update = 2;
+    repeated StorageUpdate storage_update = 3;
+}
+
+message BalanceUpdate {
+    bytes account = 1;
+    bytes token = 2;
+    bytes balance = 3;
+}
+
+message NonceUpdate {
+    bytes account = 1;
+    bytes nonce = 2;
+}
+
+message StorageUpdate {
+    bytes account = 1;
+    bytes slot_key = 2;
+    bytes value = 3;
+}
+
+message Transaction{
+    bytes from = 2;
+    bytes to = 1;
+    bytes value = 3;
+    bytes data = 4;
+}
+
+message Balance{
+    bytes value = 1;
+}
