@@ -1,5 +1,5 @@
 # atendele
-Atendele: L3. Is that a thing?
+Atendele: L3 on top of ZKsync era. Is that a thing?
 
 ## How to Run the Project
 
