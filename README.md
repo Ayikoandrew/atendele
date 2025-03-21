@@ -1,5 +1,5 @@
 # atendele
-Atendele: Bold, Affordable Digital Transactions
+Atendele: L3. Is that a thing?
 
 ## How to Run the Project
 
