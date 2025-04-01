@@ -16,6 +16,7 @@ type Hasher[T any] interface {
 type BlockHasher struct{}
 
 func HashBlock(d *Block) (types.Hash, error) {
+
 	pbBlock := &types.Block{
 		BlockNumber:        d.BlockNumber,
 		Timestamp:          d.Timestamp,

@@ -1,6 +1,9 @@
 package types
 
 import (
+	"crypto/rand"
+	"encoding/binary"
+	"fmt"
 	"log/slog"
 )
 
@@ -16,4 +19,24 @@ func HashFromByte(d []byte) (Hash, error) {
 		value[i] = d[i]
 	}
 	return Hash(value), nil
+}
+
+func RandomBytes(size int) []byte {
+	token := make([]byte, size)
+	rand.Read(token)
+	return token
+}
+
+func RandomHash() Hash {
+	hash, err := HashFromByte(RandomBytes(32))
+	if err != nil {
+		fmt.Printf("error generating 32 bytes")
+	}
+	return hash
+}
+
+func BlockNumber() uint64 {
+	buf := make([]byte, 8)
+	rand.Read(buf)
+	return binary.LittleEndian.Uint64(buf)
 }

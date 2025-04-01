@@ -1,7 +1,6 @@
 package crypto
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -19,7 +18,4 @@ func Test_Keypair(t *testing.T) {
 	res := pub.Verify(data, sig)
 
 	assert.IsType(t, true, res)
-
-	a := pub.public.X.String()
-	fmt.Printf("address %+v", a)
 }
