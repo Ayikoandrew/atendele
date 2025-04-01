@@ -1,5 +1,5 @@
 # atendele
-Atendele: Bold, Affordable Digital Transactions
+Atendele: Layer on top of ZKsync era. Is that a thing?
 
 ## How to Run the Project
 
