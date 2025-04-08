@@ -37,7 +37,7 @@ type PublicKey struct {
 	public *ecdsa.PublicKey
 }
 
-func (p *PrivateKey) GeneratePublicKey() PublicKey {
+func (p *PrivateKey) PublicKey() PublicKey {
 	return PublicKey{
 		public: &p.private.PublicKey,
 	}
